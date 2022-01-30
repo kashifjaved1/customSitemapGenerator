@@ -20,12 +20,15 @@ namespace customSitemapGenerator
 
             List<string> _stateNames = new List<string>(),
                 _cityNames = new List<string>(),
-                _cityAreaNames = new List<string>();
-
-            List<string> _parentCtg = new List<string>(),
+                _cityAreaNames = new List<string>(),
+                _parentCtg = new List<string>(),
                 _childCtg = new List<string>(),
-                _subChildCtg = new List<string>();
+                _subChildCtg = new List<string>(),
+                finalURLs = new List<string>(),
+                menuList = new List<string>(),
+                locList = new List<string>(); ;
 
+            // Adding State_Names, City_Names, City_Area_Names to respective lists.
             foreach (Locations locationsData in locationJObj.LocationsData)
             {
                 foreach (StatesCode states in locationsData.StatesCode)
@@ -49,6 +52,7 @@ namespace customSitemapGenerator
                 }
             }
 
+            // Adding Parent_Category_Name, Child_Category_Name, subChild_Category_Name to respective lists.
             foreach (MenuData menu in menuJObj.MenuData)
             {
                 if (menu.CategoryName != null && menu.CategoryName != "")
@@ -73,47 +77,57 @@ namespace customSitemapGenerator
                 }
             }
 
-            List<string> finalURLs = new List<string>();
-
+            // Adding State_Names based URLs to main (finalURLs) list & writing to file.
             foreach (string el in _stateNames)
             {
                 var stringToAdd = "https://bazaarr.pk/Listings/" + el;
                 finalURLs.Add(stringToAdd);
+                Writer.WriteToFile(stringToAdd);
             }
 
+            // Adding City_Names based URLs to main (finalURLs) list & writing to file.
             foreach (string el in _cityNames)
             {
                 var stringToAdd = "https://bazaarr.pk/Listings/" + el;
                 finalURLs.Add(stringToAdd);
+                Writer.WriteToFile(stringToAdd);
             }
 
+            // Adding City_Area_Names based URLs to main (finalURLs) list & writing to file.
             foreach (string el in _cityAreaNames)
             {
                 var stringToAdd = "https://bazaarr.pk/Listings/" + el;
                 finalURLs.Add(stringToAdd);
+                Writer.WriteToFile(stringToAdd);
             }
 
+            // Adding Parent_Category_Name to main (finalURLs) list & writing to file.
             foreach (string el in _parentCtg)
             {
                 var stringToAdd = "https://bazaarr.pk/Listings/" + el;
                 finalURLs.Add(stringToAdd);
+                Writer.WriteToFile(stringToAdd);
             }
 
+            // Adding Child_Category_Name to main (finalURLs) list & writing to file.
             foreach (string el in _childCtg)
             {
                 var stringToAdd = "https://bazaarr.pk/Listings/" + el;
                 finalURLs.Add(stringToAdd);
+                Writer.WriteToFile(stringToAdd);
             }
 
+
+
+            // Adding subChild_Category_Name to main (finalURLs) list & writing to file.
             foreach (string el in _subChildCtg)
             {
                 var stringToAdd = "https://bazaarr.pk/Listings/" + el;
                 finalURLs.Add(stringToAdd);
+                Writer.WriteToFile(stringToAdd);
             }
 
-            List<string> menuList = new List<string>(),
-                locList = new List<string>();
-
+            // Adding State_Names, City_Names, City_Area_Names combination to main list and writing to file.
             for (int i = 0; i < _stateNames.Count; i++)
             {
                 locList.Add(_stateNames[i]);
@@ -125,7 +139,9 @@ namespace customSitemapGenerator
                     locList.Add(temp);
 
                     temp = "https://bazaarr.pk/Listings/" + temp;
-                    finalURLs.Add(temp);
+                    //finalURLs.Add(temp);
+                    Writer.WriteToFile(temp);
+                    Functions.sleep(1);
 
                     for (int k = 0; k < _cityAreaNames.Count; k++)
                     {
@@ -134,23 +150,30 @@ namespace customSitemapGenerator
                         locList.Add(temp);
 
                         temp = "https://bazaarr.pk/Listings/" + temp;
-                        finalURLs.Add(temp);
+                        //finalURLs.Add(temp);
+                        Writer.WriteToFile(temp);
+                        Functions.sleep(1);
 
                         temp = _cityNames[i] + "/" + _cityAreaNames[k];
                         locList.Add(temp);
 
                         temp = "https://bazaarr.pk/Listings/" + temp;
-                        finalURLs.Add(temp);
+                        //finalURLs.Add(temp);
+                        Writer.WriteToFile(temp);
+                        Functions.sleep(1);
 
                         temp = _stateNames[i] + "/" + _cityNames[j] + "/" + _cityAreaNames[k];
                         locList.Add(temp);
 
                         temp = "https://bazaarr.pk/Listings/" + temp;
-                        finalURLs.Add(temp);
+                        //finalURLs.Add(temp);
+                        Writer.WriteToFile(temp);
+                        Functions.sleep(1);
                     }
                 }
             }
 
+            // Adding Parent_Category_Name, Child_Category_Name, subChild_Category_Name combination to main list and writing to file.
             for (int i = 0; i < _parentCtg.Count; i++)
             {
                 menuList.Add(_parentCtg[i]);
@@ -188,10 +211,25 @@ namespace customSitemapGenerator
                 }
             }
 
-            Functions.crossOfArrays(locList, menuList, finalURLs);
+            // Adding Menu & Location lists combination to main list and writing to file.
+            Functions.crossOfTwoLists(locList, menuList, finalURLs);
 
+            // Print range-based data from main list.
             Functions.print(finalURLs, 0, 50);
 
+            // freeing up memory by clearing all lists.
+            List<List<string>> listOfLists = new List<List<string>>();
+            listOfLists.Add(locList);
+            listOfLists.Add(menuList);
+            listOfLists.Add(_stateNames);
+            listOfLists.Add(_cityNames);
+            listOfLists.Add(_cityAreaNames);
+            listOfLists.Add(_childCtg);
+            listOfLists.Add(_parentCtg);
+            listOfLists.Add(_subChildCtg);
+            listOfLists.Add(finalURLs);
+
+            Functions.freeUpSpace(listOfLists);
         }
     }
 }
