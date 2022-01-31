@@ -12,7 +12,7 @@ namespace customSitemapGenerator
     class Program
     {
         static void Main(string[] args)
-        {   
+        {
             LocationRoot locationJObj = Functions.genericReturnObj<LocationRoot>(Inputs.locationsJsonString);
             MenuRoot menuJObj = Functions.genericReturnObj<MenuRoot>(Inputs.menusJsonString);
 
@@ -82,7 +82,6 @@ namespace customSitemapGenerator
             {
                 var stringToAdd = "https://bazaarr.pk/Listings/" + el;
                 finalURLs.Add(stringToAdd);
-                Writer.WriteToFile(stringToAdd);
             }
 
             // Adding City_Names based URLs to main (finalURLs) list & writing to file.
@@ -90,7 +89,6 @@ namespace customSitemapGenerator
             {
                 var stringToAdd = "https://bazaarr.pk/Listings/" + el;
                 finalURLs.Add(stringToAdd);
-                Writer.WriteToFile(stringToAdd);
             }
 
             // Adding City_Area_Names based URLs to main (finalURLs) list & writing to file.
@@ -98,7 +96,6 @@ namespace customSitemapGenerator
             {
                 var stringToAdd = "https://bazaarr.pk/Listings/" + el;
                 finalURLs.Add(stringToAdd);
-                Writer.WriteToFile(stringToAdd);
             }
 
             // Adding Parent_Category_Name to main (finalURLs) list & writing to file.
@@ -106,7 +103,6 @@ namespace customSitemapGenerator
             {
                 var stringToAdd = "https://bazaarr.pk/Listings/" + el;
                 finalURLs.Add(stringToAdd);
-                Writer.WriteToFile(stringToAdd);
             }
 
             // Adding Child_Category_Name to main (finalURLs) list & writing to file.
@@ -114,17 +110,13 @@ namespace customSitemapGenerator
             {
                 var stringToAdd = "https://bazaarr.pk/Listings/" + el;
                 finalURLs.Add(stringToAdd);
-                Writer.WriteToFile(stringToAdd);
             }
-
-
 
             // Adding subChild_Category_Name to main (finalURLs) list & writing to file.
             foreach (string el in _subChildCtg)
             {
                 var stringToAdd = "https://bazaarr.pk/Listings/" + el;
                 finalURLs.Add(stringToAdd);
-                Writer.WriteToFile(stringToAdd);
             }
 
             // Adding State_Names, City_Names, City_Area_Names combination to main list and writing to file.
@@ -139,9 +131,7 @@ namespace customSitemapGenerator
                     locList.Add(temp);
 
                     temp = "https://bazaarr.pk/Listings/" + temp;
-                    //finalURLs.Add(temp);
-                    Writer.WriteToFile(temp);
-                    Functions.sleep(1);
+                    finalURLs.Add(temp);
 
                     for (int k = 0; k < _cityAreaNames.Count; k++)
                     {
@@ -150,25 +140,19 @@ namespace customSitemapGenerator
                         locList.Add(temp);
 
                         temp = "https://bazaarr.pk/Listings/" + temp;
-                        //finalURLs.Add(temp);
-                        Writer.WriteToFile(temp);
-                        Functions.sleep(1);
+                        finalURLs.Add(temp);
 
                         temp = _cityNames[i] + "/" + _cityAreaNames[k];
                         locList.Add(temp);
 
                         temp = "https://bazaarr.pk/Listings/" + temp;
-                        //finalURLs.Add(temp);
-                        Writer.WriteToFile(temp);
-                        Functions.sleep(1);
+                        finalURLs.Add(temp);
 
                         temp = _stateNames[i] + "/" + _cityNames[j] + "/" + _cityAreaNames[k];
                         locList.Add(temp);
 
                         temp = "https://bazaarr.pk/Listings/" + temp;
-                        //finalURLs.Add(temp);
-                        Writer.WriteToFile(temp);
-                        Functions.sleep(1);
+                        finalURLs.Add(temp);
                     }
                 }
             }
@@ -211,11 +195,40 @@ namespace customSitemapGenerator
                 }
             }
 
+            foreach (string elem in menuList)
+            {
+                Writer.WriteToFile(elem, "menus");
+            }
+
+            foreach (string elem in locList)
+            {
+                Writer.WriteToFile(elem, "locations");
+            }
+
+            int fileIndex = 1, lineCounter = 1;
+
+            for (int i = 0; i < finalURLs.Count; i++)
+            {
+                if (lineCounter == 10000)
+                {
+                    fileIndex = fileIndex + 1;
+                    lineCounter = 0;
+                    Writer.WriteToFile(finalURLs[i], fileIndex.ToString());
+                }
+                else
+                {
+                    Writer.WriteToFile(finalURLs[i], fileIndex.ToString());
+                }
+                lineCounter++;
+            }
+
+            Environment.Exit(0);
+
             // Adding Menu & Location lists combination to main list and writing to file.
             Functions.crossOfTwoLists(locList, menuList, finalURLs);
 
             // Print range-based data from main list.
-            Functions.print(finalURLs, 0, 50);
+            //Functions.print(finalURLs, 0, 50);
 
             // freeing up memory by clearing all lists.
             List<List<string>> listOfLists = new List<List<string>>();
