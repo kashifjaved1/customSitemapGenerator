@@ -10,7 +10,7 @@ namespace customSitemapGenerator
     class Writer
     {
         
-        public static async Task WriteToFile(string str, string fileName) //(List<string> list)
+        public static async Task WriteToFile(string str, string fileName, string action = null) //(List<string> list)
         {
             // path of file to create / read / write / append.[NOTE]: place sitemap file to desired path and put that path in path_variable.
             string filePath = null;
@@ -48,7 +48,14 @@ namespace customSitemapGenerator
                 //    sw.WriteLine("</url>");
                 //}
 
-                await Write(sw, str);
+                if (action == "WRITE_STRING_ONLY")
+                {
+                    sw.WriteLine(str);
+                }
+                else
+                {
+                    await WriteAsync(sw, str);
+                }
 
                 //sw.WriteLine("<url>");
                 //sw.WriteLine("<loc>" + str + "</loc>"); //Url String
@@ -60,7 +67,7 @@ namespace customSitemapGenerator
             }
         }
 
-        private static async Task Write(StreamWriter sw, string str)
+        private static async Task WriteAsync(StreamWriter sw, string str)
         {
             sw.WriteLine("<url>");
             sw.WriteLine("<loc>" + str + "</loc>"); //Url String

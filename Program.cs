@@ -197,12 +197,12 @@ namespace customSitemapGenerator
 
             foreach (string elem in menuList)
             {
-                Writer.WriteToFile(elem, "menus");
+                Writer.WriteToFile(elem, "menus", "WRITE_STRING_ONLY");
             }
 
             foreach (string elem in locList)
             {
-                Writer.WriteToFile(elem, "locations");
+                Writer.WriteToFile(elem, "locations", "WRITE_STRING_ONLY");
             }
 
             int fileIndex = 1, lineCounter = 1;
