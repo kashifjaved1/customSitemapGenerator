@@ -19,7 +19,7 @@ namespace customSitemapGenerator
 
             // Initializing Lists.
             List<string> menuList = new List<string>(),
-                locList = new List<string>(); ;
+                locList = new List<string>();
 
             foreach (Locations locationsData in locationJObj.LocationsData)
             {
@@ -65,8 +65,6 @@ namespace customSitemapGenerator
                 }
             }
 
-            foreach (string l in locList) Console.WriteLine(l);
-
             foreach (MenuData menu in menuJObj.MenuData)
             {
                 if (menu.CategoryName != null && menu.CategoryName != "")
@@ -85,7 +83,6 @@ namespace customSitemapGenerator
 
                                 if (childCtg.Level_CTE3.Count > 0)
                                 {
-                                    menuList.Add(ctgName1);
                                     menuList.Add(ctgName0 + "/" + ctgName1);
 
                                     foreach (LevelCTE3 subChildCtg in childCtg.Level_CTE3)
@@ -99,7 +96,6 @@ namespace customSitemapGenerator
                                 }
                                 else
                                 {
-                                    menuList.Add(ctgName1);
                                     menuList.Add(ctgName0 + "/" + ctgName1);
                                 }
                             }
@@ -112,21 +108,11 @@ namespace customSitemapGenerator
                 }
             }
 
-            //foreach (string elem in menuList)
-            //{
-            //    Writer.WriteToFile(elem, "menus", "WRITE_STRING_ONLY");
-            //}
-
-            //foreach (string elem in locList)
-            //{
-            //    Writer.WriteToFile(elem, "locations", "WRITE_STRING_ONLY");
-            //}
-
             bool breakLoop = false;
             int loopRepCounter = 0, fileIndex = 1;
-            string controlAreaName = "LOCATIONS";
+            string controlAreaName = "LOCATIONS", url = null;
 
-            while (!breakLoop)
+            while (breakLoop == false)
             {
                 if (controlAreaName == "LOCATIONS")
                 {
@@ -135,12 +121,15 @@ namespace customSitemapGenerator
                         if (loopRepCounter == 10000)
                         {
                             fileIndex++;
-                            Writer.WriteToFile("https://bazaarr.pk/Listings/" + l, fileIndex.ToString());
+                            url = "https://bazaarr.pk/Listings/" + l;
+                            Writer.WriteToFile(url, fileIndex.ToString());
                             loopRepCounter = 0;
                         }
                         else
                         {
-                            Writer.WriteToFile("https://bazaarr.pk/Listings/" + l, null);
+                            loopRepCounter++; Console.WriteLine(loopRepCounter);
+                            url = "https://bazaarr.pk/Listings/" + l;
+                            Writer.WriteToFile(url, fileIndex.ToString());
                         }
                     }
                     controlAreaName = "MENUS";
@@ -152,12 +141,15 @@ namespace customSitemapGenerator
                         if (loopRepCounter == 10000)
                         {
                             fileIndex++;
-                            Writer.WriteToFile("https://bazaarr.pk/Listings/" + m, fileIndex.ToString());
+                            url = "https://bazaarr.pk/Listings/" + m;
+                            Writer.WriteToFile(url, fileIndex.ToString());
                             loopRepCounter = 0;
                         }
                         else
                         {
-                            Writer.WriteToFile("https://bazaarr.pk/Listings/" + m, null);
+                            loopRepCounter++; Console.WriteLine(loopRepCounter);
+                            url = "https://bazaarr.pk/Listings/" + m;
+                            Writer.WriteToFile(url, fileIndex.ToString());
                         }
                     }
                     controlAreaName = "MIXED";
@@ -171,15 +163,19 @@ namespace customSitemapGenerator
                             if (loopRepCounter == 10000)
                             {
                                 fileIndex++;
-                                Writer.WriteToFile("https://bazaarr.pk/Listings/" + l + "/" + m, fileIndex.ToString());
+                                url = "https://bazaarr.pk/Listings/" + l + "/" + m;
+                                Writer.WriteToFile(url, fileIndex.ToString());
                                 loopRepCounter = 0;
                             }
                             else
                             {
-                                Writer.WriteToFile("https://bazaarr.pk/Listings/" + l + "/" + m, null);
+                                loopRepCounter++; Console.WriteLine(loopRepCounter);
+                                url = "https://bazaarr.pk/Listings/" + l + "/" + m;
+                                Writer.WriteToFile(url, fileIndex.ToString());
                             }
                         }
                     }
+                    breakLoop = true;
                 }
             }
 
