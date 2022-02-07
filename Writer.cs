@@ -9,28 +9,18 @@ namespace customSitemapGenerator
 {
     class Writer
     {
-        
+
         public static async Task WriteToFile(string str, string fileName, string action = null) //(List<string> list)
         {
-            // path of file to create / read / write / append.[NOTE]: place sitemap file to desired path and put that path in path_variable.
-            string filePath = null;
+            string directoryName = @"C:\sitemapXMLs";
 
-            //if (fileName == "menus")
-            //{
-            //    filePath = @"C:\Users\M. Kashif Javed\Desktop\customSitemapGenerator\menusList.txt";
-            //}
-            //else if (fileName == "locations")
-            //{
-            //    filePath = @"C:\Users\M. Kashif Javed\Desktop\customSitemapGenerator\locationsList.txt";
-            //}
-            //else
-            //{
-            //    filePath = @"C:\Users\M. Kashif Javed\Desktop\customSitemapGenerator\sitemap-" + fileName + ".xml";
-            //}
+            if (!Directory.Exists(directoryName)) Directory.CreateDirectory(directoryName);
+
+            string filePath = null;
 
             if (fileName != null)
             {
-                filePath = @"C:\Users\M. Kashif Javed\Desktop\customSitemapGenerator\sitemap-" + fileName + ".xml";
+                filePath = Path.Combine(directoryName, "sitemap-" + fileName + ".xml");
             }
 
             // check, if file exist or not.
@@ -46,26 +36,49 @@ namespace customSitemapGenerator
             using (StreamWriter sw = File.AppendText(filePath))
             {
 
-                if (action == "WRITE_STRING_ONLY")
-                {
-                    sw.WriteLine(str);
-                }
-                else
-                {
-                    await WriteAsync(sw, str);
-                }
-
-                // unComment following when writing to file completely finished.
-                //sw.WriteLine("</urlset>");
+                await WriteAsync(sw, str, action);
             }
         }
 
-        private static async Task WriteAsync(StreamWriter sw, string str)
+        private static async Task WriteAsync(StreamWriter sw, string str, string action)
         {
-            sw.WriteLine("<url>");
-            sw.WriteLine("<loc>" + str + "</loc>"); //Url String
-            sw.WriteLine("<lastmod>" + DateTime.Now + "</lastmod>");
-            sw.WriteLine("</url>");
+            string l1 = "<?xml version = \"1.0\" encoding=\"UTF-8\" ?>";
+            string l2 = "<urlset";
+            string l3 = "xmlns = \"http://www.sitemaps.org/schemas/sitemap/0.9\"";
+            string l4 = "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"";
+            string l5 = "xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9";
+            string l6 = "http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">";
+            string l7 = "</urlset>";
+
+            if (action == "WRITE_WITH_HEADER")
+            {
+                sw.WriteLine(l1 + "\n" + l2 + "\n" + l3 + "\n" + l4 + "\n" + l5 + "\n" + l6 + "\n");
+                sw.WriteLine("<url>");
+                sw.WriteLine("<loc>" + str + "</loc>"); //Url String
+                sw.WriteLine("<lastmod>2022-02-08</lastmod>");
+                sw.WriteLine("<changefreq>monthly</changefreq>");
+                sw.WriteLine("<priority>0.8</priority>");
+                sw.WriteLine("</url>");
+            }
+            else if(action == "WRITE_WITH_FOOTER")
+            {
+                sw.WriteLine("<url>");
+                sw.WriteLine("<loc>" + str + "</loc>"); //Url String
+                sw.WriteLine("<lastmod>2022-02-08</lastmod>");
+                sw.WriteLine("<changefreq>monthly</changefreq>");
+                sw.WriteLine("<priority>0.8</priority>");
+                sw.WriteLine("</url>");
+                sw.WriteLine("\n" + l7);
+            }
+            else
+            {
+                sw.WriteLine("<url>");
+                sw.WriteLine("<loc>" + str + "</loc>"); //Url String
+                sw.WriteLine("<lastmod>2022-02-08</lastmod>");
+                sw.WriteLine("<changefreq>monthly</changefreq>");
+                sw.WriteLine("<priority>0.8</priority>");
+                sw.WriteLine("</url>");
+            }
         }
     }
 }

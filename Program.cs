@@ -26,7 +26,7 @@ namespace customSitemapGenerator
                 foreach (StatesCode states in locationsData.StatesCode)
                 {
                     string stateName = Functions.fixTheString(states.StateName);
-                 
+
                     if (locationsData.StatesCode.Count > 0)
                     {
                         locList.Add(stateName);
@@ -112,24 +112,36 @@ namespace customSitemapGenerator
             int loopRepCounter = 0, fileIndex = 1;
             string controlAreaName = "LOCATIONS", url = null;
 
-            while (breakLoop == false)
+            while (breakLoop != true)
             {
                 if (controlAreaName == "LOCATIONS")
                 {
                     foreach (string l in locList)
                     {
-                        if (loopRepCounter == 10000)
+                        Console.WriteLine("Outsider: " + loopRepCounter);
+
+                        if (loopRepCounter == 0)
                         {
-                            fileIndex++;
+                            Console.WriteLine("insider @0: " + loopRepCounter);
                             url = "https://bazaarr.pk/Listings/" + l;
-                            Writer.WriteToFile(url, fileIndex.ToString());
+                            Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_HEADER");
+                            //loopRepCounter++;
+                            loopRepCounter = 1;
+                        }
+                        else if (loopRepCounter == 9999)
+                        {
+                            Console.WriteLine("insider @9999: " + loopRepCounter);
+                            url = "https://bazaarr.pk/Listings/" + l;
+                            Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_FOOTER");
                             loopRepCounter = 0;
+                            fileIndex++;
                         }
                         else
                         {
-                            loopRepCounter++; Console.WriteLine(loopRepCounter);
+                            Console.WriteLine("insider else: " + loopRepCounter);
                             url = "https://bazaarr.pk/Listings/" + l;
                             Writer.WriteToFile(url, fileIndex.ToString());
+                            loopRepCounter++;
                         }
                     }
                     controlAreaName = "MENUS";
@@ -138,18 +150,30 @@ namespace customSitemapGenerator
                 {
                     foreach (string m in menuList)
                     {
-                        if (loopRepCounter == 10000)
+                        Console.WriteLine("Outsider: " + loopRepCounter);
+
+                        if (loopRepCounter == 0)
                         {
-                            fileIndex++;
+                            Console.WriteLine("insider @0: " + loopRepCounter);
                             url = "https://bazaarr.pk/Listings/" + m;
-                            Writer.WriteToFile(url, fileIndex.ToString());
+                            Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_HEADER");
+                            //loopRepCounter++;
+                            loopRepCounter = 1;
+                        }
+                        else if (loopRepCounter == 9999)
+                        {
+                            Console.WriteLine("insider @9999: " + loopRepCounter);
+                            url = "https://bazaarr.pk/Listings/" + m;
+                            Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_FOOTER");
                             loopRepCounter = 0;
+                            fileIndex++;
                         }
                         else
                         {
-                            loopRepCounter++; Console.WriteLine(loopRepCounter);
+                            Console.WriteLine("insider else: " + loopRepCounter);
                             url = "https://bazaarr.pk/Listings/" + m;
                             Writer.WriteToFile(url, fileIndex.ToString());
+                            loopRepCounter++;
                         }
                     }
                     controlAreaName = "MIXED";
@@ -160,18 +184,30 @@ namespace customSitemapGenerator
                     {
                         foreach (string m in menuList)
                         {
-                            if (loopRepCounter == 10000)
+                            Console.WriteLine("Outsider: " + loopRepCounter);
+
+                            if (loopRepCounter == 0)
                             {
-                                fileIndex++;
+                                Console.WriteLine("insider @0: " + loopRepCounter);
                                 url = "https://bazaarr.pk/Listings/" + l + "/" + m;
-                                Writer.WriteToFile(url, fileIndex.ToString());
+                                Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_HEADER");
+                                //loopRepCounter++;
+                                loopRepCounter = 1;
+                            }
+                            else if (loopRepCounter == 9999)
+                            {
+                                Console.WriteLine("insider @9999: " + loopRepCounter);
+                                url = "https://bazaarr.pk/Listings/" + l + "/" + m;
+                                Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_FOOTER");
                                 loopRepCounter = 0;
+                                fileIndex++;
                             }
                             else
                             {
-                                loopRepCounter++; Console.WriteLine(loopRepCounter);
+                                Console.WriteLine("insider else: " + loopRepCounter);
                                 url = "https://bazaarr.pk/Listings/" + l + "/" + m;
                                 Writer.WriteToFile(url, fileIndex.ToString());
+                                loopRepCounter++;
                             }
                         }
                     }
