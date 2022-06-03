@@ -28,7 +28,7 @@ namespace customSitemapGenerator
             {
                 using (StreamWriter sw = File.CreateText(filePath))
                 {
-                    sw.WriteLine("");
+                    sw.Write("");
                 }
             }
 
@@ -42,9 +42,9 @@ namespace customSitemapGenerator
 
         private static async Task WriteAsync(StreamWriter sw, string str, string action)
         {
-            string l1 = "<?xml version = \"1.0\" encoding=\"UTF-8\" ?>";
+            string l1 = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
             string l2 = "<urlset";
-            string l3 = "xmlns = \"http://www.sitemaps.org/schemas/sitemap/0.9\"";
+            string l3 = "xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"";
             string l4 = "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"";
             string l5 = "xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9";
             string l6 = "http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">";
@@ -52,7 +52,7 @@ namespace customSitemapGenerator
 
             if (action == "WRITE_WITH_HEADER")
             {
-                sw.WriteLine(l1 + "\n" + l2 + "\n" + l3 + "\n" + l4 + "\n" + l5 + "\n" + l6 + "\n");
+                sw.Write(l1 + "\n" + l2 + "\n" + l3 + "\n" + l4 + "\n" + l5 + "\n" + l6 + "\n");
                 sw.WriteLine("<url>");
                 sw.WriteLine("<loc>" + str + "</loc>"); //Url String
                 sw.WriteLine("<lastmod>2022-02-08</lastmod>");

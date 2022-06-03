@@ -110,43 +110,45 @@ namespace customSitemapGenerator
 
             bool breakLoop = false;
             int loopRepCounter = 0, fileIndex = 1;
-            string controlAreaName = "LOCATIONS", url = null;
+            //string controlAreaName = "LOCATIONS", url = null;
+            string controlAreaName = "MENUS", url = null;
 
             while (breakLoop != true)
             {
-                if (controlAreaName == "LOCATIONS")
-                {
-                    foreach (string l in locList)
-                    {
-                        Console.WriteLine("Outsider: " + loopRepCounter);
+                //if (controlAreaName == "LOCATIONS")
+                //{
+                //    foreach (string l in locList)
+                //    {
+                //        Console.WriteLine("Outsider: " + loopRepCounter);
 
-                        if (loopRepCounter == 0)
-                        {
-                            Console.WriteLine("insider @0: " + loopRepCounter);
-                            url = "https://bazaarr.pk/Listings/" + l;
-                            Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_HEADER");
-                            //loopRepCounter++;
-                            loopRepCounter = 1;
-                        }
-                        else if (loopRepCounter == 9999)
-                        {
-                            Console.WriteLine("insider @9999: " + loopRepCounter);
-                            url = "https://bazaarr.pk/Listings/" + l;
-                            Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_FOOTER");
-                            loopRepCounter = 0;
-                            fileIndex++;
-                        }
-                        else
-                        {
-                            Console.WriteLine("insider else: " + loopRepCounter);
-                            url = "https://bazaarr.pk/Listings/" + l;
-                            Writer.WriteToFile(url, fileIndex.ToString());
-                            loopRepCounter++;
-                        }
-                    }
-                    controlAreaName = "MENUS";
-                }
-                else if (controlAreaName == "MENUS")
+                //        if (loopRepCounter == 0)
+                //        {
+                //            Console.WriteLine("insider @0: " + loopRepCounter);
+                //            url = "https://bazaarr.pk/Listings/" + l;
+                //            Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_HEADER");
+                //            //loopRepCounter++;
+                //            loopRepCounter = 1;
+                //        }
+                //        else if (loopRepCounter == 9999)
+                //        {
+                //            Console.WriteLine("insider @9999: " + loopRepCounter);
+                //            url = "https://bazaarr.pk/Listings/" + l;
+                //            Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_FOOTER");
+                //            loopRepCounter = 0;
+                //            fileIndex++;
+                //        }
+                //        else
+                //        {
+                //            Console.WriteLine("insider else: " + loopRepCounter);
+                //            url = "https://bazaarr.pk/Listings/" + l;
+                //            Writer.WriteToFile(url, fileIndex.ToString());
+                //            loopRepCounter++;
+                //        }
+                //    }
+                //    controlAreaName = "MENUS";
+                //}
+                //else if
+                if (controlAreaName == "MENUS")
                 {
                     foreach (string m in menuList)
                     {
