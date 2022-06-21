@@ -47,6 +47,7 @@ namespace customSitemapGenerator
             input = input.Replace("-&-", "-");
             input = input.Replace(",-", "-");
             input = input.Replace("'", "-");
+            input = input.Replace("-&", "-");
 
             return input;
         }
