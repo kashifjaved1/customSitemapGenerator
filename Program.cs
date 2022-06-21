@@ -124,7 +124,7 @@ namespace customSitemapGenerator
                 //        if (loopRepCounter == 0)
                 //        {
                 //            Console.WriteLine("insider @0: " + loopRepCounter);
-                //            url = "https://themarche.ca/Listings/" + l;
+                //            url = "https://bazaarr.pk/Listings/" + l;
                 //            Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_HEADER");
                 //            //loopRepCounter++;
                 //            loopRepCounter = 1;
@@ -132,7 +132,7 @@ namespace customSitemapGenerator
                 //        else if (loopRepCounter == 9999)
                 //        {
                 //            Console.WriteLine("insider @9999: " + loopRepCounter);
-                //            url = "https://themarche.ca/Listings/" + l;
+                //            url = "https://bazaarr.pk/Listings/" + l;
                 //            Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_FOOTER");
                 //            loopRepCounter = 0;
                 //            fileIndex++;
@@ -140,7 +140,7 @@ namespace customSitemapGenerator
                 //        else
                 //        {
                 //            Console.WriteLine("insider else: " + loopRepCounter);
-                //            url = "https://themarche.ca/Listings/" + l;
+                //            url = "https://bazaarr.pk/Listings/" + l;
                 //            Writer.WriteToFile(url, fileIndex.ToString());
                 //            loopRepCounter++;
                 //        }
@@ -157,7 +157,8 @@ namespace customSitemapGenerator
                         if (loopRepCounter == 0)
                         {
                             Console.WriteLine("insider @0: " + loopRepCounter);
-                            url = "https://themarche.ca/Listings/" + m;
+                            //url = "https://themarche.ca/Listings/" + m;
+                            url = "https://bazaarr.pk/Listings/" + m;
                             Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_HEADER");
                             //loopRepCounter++;
                             loopRepCounter = 1;
@@ -165,7 +166,8 @@ namespace customSitemapGenerator
                         else if (loopRepCounter == 9999)
                         {
                             Console.WriteLine("insider @9999: " + loopRepCounter);
-                            url = "https://themarche.ca/Listings/" + m;
+                            //url = "https://themarche.ca/Listings/" + m;
+                            url = "https://bazaarr.pk/Listings/" + m;
                             Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_FOOTER");
                             loopRepCounter = 0;
                             fileIndex++;
@@ -173,7 +175,8 @@ namespace customSitemapGenerator
                         else
                         {
                             Console.WriteLine("insider else: " + loopRepCounter);
-                            url = "https://themarche.ca/Listings/" + m;
+                            //url = "https://themarche.ca/Listings/" + m;
+                            url = "https://bazaarr.pk/Listings/" + m;
                             Writer.WriteToFile(url, fileIndex.ToString());
                             loopRepCounter++;
                         }
@@ -191,7 +194,8 @@ namespace customSitemapGenerator
                             if (loopRepCounter == 0)
                             {
                                 Console.WriteLine("insider @0: " + loopRepCounter);
-                                url = "https://themarche.ca/Listings/" + l + "/" + m;
+                                //url = "https://themarche.ca/Listings/" + l + "/" + m;
+                                url = "https://bazaarr.pk/Listings/" + l + "/" + m;
                                 Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_HEADER");
                                 //loopRepCounter++;
                                 loopRepCounter = 1;
@@ -199,7 +203,8 @@ namespace customSitemapGenerator
                             else if (loopRepCounter == 9999)
                             {
                                 Console.WriteLine("insider @9999: " + loopRepCounter);
-                                url = "https://themarche.ca/Listings/" + l + "/" + m;
+                                //url = "https://themarche.ca/Listings/" + l + "/" + m;
+                                url = "https://bazaarr.pk/Listings/" + l + "/" + m;
                                 Writer.WriteToFile(url, fileIndex.ToString(), "WRITE_WITH_FOOTER");
                                 loopRepCounter = 0;
                                 fileIndex++;
@@ -207,7 +212,8 @@ namespace customSitemapGenerator
                             else
                             {
                                 Console.WriteLine("insider else: " + loopRepCounter);
-                                url = "https://themarche.ca/Listings/" + l + "/" + m;
+                                //url = "https://themarche.ca/Listings/" + l + "/" + m;
+                                url = "https://bazaarr.pk/Listings/" + l + "/" + m;
                                 Writer.WriteToFile(url, fileIndex.ToString());
                                 loopRepCounter++;
                             }

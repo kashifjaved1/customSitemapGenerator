@@ -13,6 +13,7 @@ namespace customSitemapGenerator
             {
                 foreach (string l2 in list2)
                 {
+                    //string temp = "https://themarche.ca/Listings/" + l1 + "/" + l2;
                     string temp = "https://bazaarr.pk/Listings/" + l1 + "/" + l2;
                     mainList.Add(temp);
                 }
